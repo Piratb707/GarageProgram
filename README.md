@@ -1,3 +1,4 @@
+Education
 # Программа гараж
 
 **Работает на Python + SQLite3**
