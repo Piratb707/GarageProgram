@@ -1,6 +1,6 @@
 import sqlite3
 
-print('*' * 10, 'Гараж v.1.0.0', '*' * 10)
+print('Garage 1.0')
 
 db = sqlite3.connect('garage.db')
 sql = db.cursor()
