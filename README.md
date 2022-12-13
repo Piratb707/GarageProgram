@@ -14,6 +14,8 @@ Education
 * Автоматическое создание БД
 * Работа с БД
 
+**Web Flask**
+* Вывод запроса SELECT из db
 # TO DO
 
 * TBot
