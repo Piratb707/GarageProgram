@@ -15,8 +15,8 @@ Education
 * Работа с БД
 
 **Web Flask**
-* Вывод запроса SELECT из db
+* Вывод в HTML форму 
+  
 # TO DO
 
 * TBot
-* WebApp
