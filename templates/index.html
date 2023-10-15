@@ -6,6 +6,12 @@
 </head>
 <body>
     <h1>Garage</h1>
-    <h3>{{ cars }}</h3>
+    <h2>Используется база = {{ name_db }}</h2>
+    <h3>Список авто:</h3>
+    <ui margin=20px>
+        {% for item in cars %}
+            <li> {{ item }} </li>
+        {% endfor %}
+    </ui>
 </body>
 </html>

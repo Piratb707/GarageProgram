@@ -1,4 +1,5 @@
 import DB_Helper as db
+import Main as m
 
 
 def menu():
@@ -9,18 +10,17 @@ def menu():
             4 - Поиск
             0 - Выход""")
     while 1:
-        result = int(input("... "))
+        result = int(input("...>> "))
         if (result >= 0) and (result <= 4):
             return result
         else:
             print("Введите корректное число [1..4, 0]")
 
 
-version = '1.0.1'
-print('Garage', version)
 
-name_db = "garage.db"
-db.create_db(name_db)
+print('Garage', m.version)
+
+db.create_db(m.name_db)
 
 response = 1
 
