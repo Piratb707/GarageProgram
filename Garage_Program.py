@@ -1,4 +1,5 @@
-import sqlite3
+import DB_Helper as db
+import Main as m
 
 
 def menu():
@@ -9,23 +10,17 @@ def menu():
             4 - Поиск
             0 - Выход""")
     while 1:
-        result = int(input("... "))
+        result = int(input("...>> "))
         if (result >= 0) and (result <= 4):
             return result
         else:
             print("Введите корректное число [1..4, 0]")
 
 
-print('Garage 1.0')
 
-db = sqlite3.connect('garage.db')
-sql = db.cursor()
+print('Garage', m.version)
 
-sql.execute("""CREATE TABLE IF NOT EXISTS cars(
-    car TEXT
-)
-""")
-db.commit()
+db.create_db(m.name_db)
 
 response = 1
 
@@ -33,37 +28,34 @@ while response:
     response = menu()
     if response == 1:
         car = input("Новое авто: ")
-        sql.execute(f"SELECT car FROM cars WHERE car = '{car}'")
-        if sql.fetchone() is None:
-            sql.execute(f"INSERT INTO cars VALUES ('{car}')")
-            db.commit()
-            print("Добавлено!")
-        else:
+        list_cars = db.open_db(name_db)
+        if car in list_cars:
             print(f"Автомобиль {car} у вас уже есть!")
+        else:
+            db.insert_db(name_db, car)
+            print("Добавлено!")
 
     elif response == 2:
         car = input("Удалить авто: ")
-        sql.execute(f"SELECT car FROM cars WHERE car = '{car}'")
-        if sql.fetchone() is None:
+        list_cars = db.open_db(name_db)
+        if car not in list_cars:
             print(f"У вас нет автомобиля {car}")
         else:
-            sql.execute(f"DELETE FROM cars WHERE car = '{car}'")
-            db.commit()
+            db.delete_db(name_db, car)
+            print("Запись удалена...")
 
     elif response == 3:
-        cars = sql.execute("SELECT * FROM cars")
-        for i in cars:
-            print(i)
+        list_cars = db.open_db(name_db)
+        for car in list_cars:
+            print(car)
 
     elif response == 4:
         car = input("Поиск: ")
-        sql.execute(f"SELECT * FROM cars WHERE car = '{car}'")
-        if sql.fetchone() is None:
-            print(f"Автомобиль {car} отсутствует в вашем гараже!")
-        else:
+        list_cars = db.open_db(name_db)
+        if car in list_cars:
             print(f"Автомобиль {car} есть у вас в гараже!")
+        else:
+            print(f"Автомобиль {car} отсутствует в вашем гараже!")
 
     else:
         print('Пока!')
-
-db.close()
