@@ -1,10 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, abort
 import sqlite3 as sql
 import Main
 
 app = Flask(__name__)
+app.secret_key = 'sdffffsf3221'
 
-@app.route('/index')
+@app.route('/index', codes=session.keys())
 def index():
 
     db = sql.connect(Main.name_db)
@@ -32,6 +33,9 @@ def account():
     # TODO Create account page
     return "This is for account page"
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
 
 if __name__ == '__main__':
     app.run(debug=False)
