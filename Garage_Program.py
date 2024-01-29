@@ -28,30 +28,30 @@ while response:
     response = menu()
     if response == 1:
         car = input("Новое авто: ")
-        list_cars = db.open_db(name_db)
+        list_cars = db.open_db(m.name_db)
         if car in list_cars:
             print(f"Автомобиль {car} у вас уже есть!")
         else:
-            db.insert_db(name_db, car)
+            db.insert_db(m.name_db, car)
             print("Добавлено!")
 
     elif response == 2:
         car = input("Удалить авто: ")
-        list_cars = db.open_db(name_db)
+        list_cars = db.open_db(m.name_db)
         if car not in list_cars:
             print(f"У вас нет автомобиля {car}")
         else:
-            db.delete_db(name_db, car)
+            db.delete_db(m.name_db, car)
             print("Запись удалена...")
 
     elif response == 3:
-        list_cars = db.open_db(name_db)
+        list_cars = db.open_db(m.name_db)
         for car in list_cars:
             print(car)
 
     elif response == 4:
         car = input("Поиск: ")
-        list_cars = db.open_db(name_db)
+        list_cars = db.open_db(m.name_db)
         if car in list_cars:
             print(f"Автомобиль {car} есть у вас в гараже!")
         else:
